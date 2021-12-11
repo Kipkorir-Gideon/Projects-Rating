@@ -29,3 +29,13 @@ class Profile(models.Model):
 
     def __str__(self):
         return "%s profile" % self.user
+
+
+
+class Projects(models.Model):
+    title = models.CharField(max_length=100)
+    screenshot = CloudinaryField('image')
+    description = models.TextField()
+    day_posted = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    url = models.URLField()
