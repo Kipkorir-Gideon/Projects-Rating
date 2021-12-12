@@ -40,7 +40,7 @@ class Projects(models.Model):
     description = models.TextField()
     day_posted = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    url = models.URLField()
+    site_url = models.URLField()
 
     def save_user_project(self):
         self.save()
