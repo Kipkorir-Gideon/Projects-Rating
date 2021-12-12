@@ -35,7 +35,7 @@
                       </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a href="/user" class="btn btn-outline-primary">{{user.username|title}}</a>
+                    <a href="/profile/{{request.user.id}}" class="btn btn-outline-primary">{{user.username|title}}</a>
                   </li>
                   <li>
                     <a href="/logout" class="nav-link">Logout</a>
@@ -66,7 +66,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form method="post">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% bootstrap_form form %}
               </div>
@@ -77,7 +77,7 @@
               </div>
         </div>
     </div>
-</div>
+  </div>
 
 </nav>
 </body>

@@ -5,8 +5,8 @@ from .forms import *
 
 # Create your views here.
 def projects(request):
-    current_user = request.user
     if request.method == 'POST':
+        current_user = request.user
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
@@ -20,7 +20,7 @@ def projects(request):
 # search projects 
 def search_projects(request):
     if 'search_project' in request.GET and request.GET["search_project"]:
-        search_term = request.GET.get("keyword")
+        search_term = request.GET.get("search_project")
         searched_projects = Projects.search_user_project(search_term)
         message = f"{search_term}"
 
@@ -29,3 +29,15 @@ def search_projects(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html', {"message": message})
+
+
+def profile(request, pk):
+    if request.method == "POST":
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+        return redirect("projects")
+    user = User.objects.get(pk=pk)
+    c_user = request.user
+    profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'profile.html', {'user': user, 'profile_form': profile_form, "c_user": c_user})

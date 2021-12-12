@@ -6,6 +6,7 @@ from . import views as app_views
 
 urlpatterns=[
     path('',views.projects,name='projects'),
+    path('profile/<pk>', views.profile, name='profile'),
     re_path(r'^search/$',app_views.search_projects,name='search'),
 
 ]
