@@ -1,11 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
+from django.contrib.auth.decorators import login_required
+from .forms import *
 
 # Create your views here.
 def projects(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.user = current_user
+            project.save()
+    form = ProjectForm()
     projects = Projects.objects.all()
-    return render(request, 'projects.html', {'projects': projects})
-
+    return render(request, 'projects.html', {'projects': projects, 'form': form})
 
 
 # search projects 

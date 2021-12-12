@@ -1,4 +1,4 @@
-
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +55,29 @@
           </div>  
   </div>
 
-  <!--Post modal-->
+  <!--Project modal-->
+  <div class="modal fade" tabindex="-1" id="postModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+              </div>
+              <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form> 
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+        </div>
+    </div>
+</div>
 
 </nav>
 </body>
