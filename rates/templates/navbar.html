@@ -15,7 +15,7 @@
     <!-- Adding a search form  -->
     <div class="col-sm-4 col-md-4 navbar-right">
 
-        <form class="mb-0 h1 ml-auto mr-auto" id="searchform" action="{% url 'search' %}">
+        <form class="mt-4 h1 ml-auto mr-auto" id="searchform" action="{% url 'search' %}">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search Projects" name="search_project">
                 <div class="input-group-btn">
@@ -23,6 +23,7 @@
                 </div>
             </div>
         </form>
+        
     </div>
     <!-- search form end -->
     <div>
@@ -40,6 +41,7 @@
                     <a href="/logout" class="nav-link">Logout</a>
                   </li>
                 </ul>
+                <button type="button" class="btn btn-warning font-weight-bold text-center ml-5" style="border-radius: 10%" data-toggle="modal" data-target="#postModal">+ Project</button>
               </li>
             </ul>
             {% else %}
@@ -52,6 +54,9 @@
             {% endif %}
           </div>  
   </div>
+
+  <!--Post modal-->
+
 </nav>
 </body>
 </html>
