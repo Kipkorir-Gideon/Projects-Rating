@@ -3,6 +3,10 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.http import Http404,HttpResponseRedirect
+from .serializer import *
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 
 # Create your views here.
 # @login_required
@@ -86,3 +90,17 @@ def rating(request, project_id):
     else:
         form = RatingsForm()
     return render(request, 'rating.html', {'form': form,'c_user': c_user,'rates': rates,'project': project,'rating_status':rating_status})
+
+
+
+class ProjectList(APIView):
+  def get(self,request,format=None):
+    projects=Projects.objects.all()
+    serializers=ProjectSerializer(projects,many=True)
+    return Response(serializers.data)
+
+class ProfileList(APIView):
+  def get(self,request,format=None):
+    profiles=Profile.objects.all()
+    serializers=ProfileSerializer(profiles,many=True)
+    return Response(serializers.data)
