@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 
 # Create your views here.
+@login_required
 def projects(request):
     if request.method == 'POST':
         current_user = request.user
@@ -18,6 +19,7 @@ def projects(request):
 
 
 # search projects 
+@login_required
 def search_projects(request):
     if 'search_project' in request.GET and request.GET["search_project"]:
         search_term = request.GET.get("search_project")
@@ -31,6 +33,7 @@ def search_projects(request):
         return render(request, 'search.html', {"message": message})
 
 
+@login_required
 def profile(request, pk):
     if request.method == "POST":
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
@@ -39,5 +42,6 @@ def profile(request, pk):
         return redirect("projects")
     user = User.objects.get(pk=pk)
     c_user = request.user
+    form = ProjectForm()
     profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profile.html', {'user': user, 'profile_form': profile_form, "c_user": c_user})
+    return render(request, 'profile.html', {'user': user, 'form': form, 'profile_form': profile_form, "c_user": c_user})
