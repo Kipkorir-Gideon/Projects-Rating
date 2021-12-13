@@ -83,5 +83,20 @@ class Rates(models.Model):
     design = models.IntegerField(default=0,blank=True,validators=[MinValueValidator(1),MaxValueValidator(10)])
     usability = models.IntegerField(default=0,blank=True,validators=[MinValueValidator(1),MaxValueValidator(10)])
     content = models.IntegerField(default=0,blank=True,validators=[MinValueValidator(1),MaxValueValidator(10)])
+    design_average = models.FloatField(default=0.0,blank=True)
+    usability_average = models.FloatField(default=0.0,blank=True)
+    content_average = models.FloatField(default=0.0,blank=True)
+    aggregate = models.FloatField(default=0.0,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Projects,on_delete=models.CASCADE)
+
+    def save_rates(self):
+      self.save()
+
+    @classmethod
+    def get_ratings(cls, id):
+        ratings = Rates.objects.filter(project_id=id).all()
+        return ratings
+
+    def __str__(self):
+        return "%s rates" % self.aggregate
