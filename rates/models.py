@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Profile(models.Model):
@@ -75,3 +76,12 @@ class Projects(models.Model):
 
     def __str__(self):
         return "%s projects" % self.title
+
+
+
+class Rates(models.Model):
+    design = models.IntegerField(default=0,blank=True,validators=[MinValueValidator(1),MaxValueValidator(10)])
+    usability = models.IntegerField(default=0,blank=True,validators=[MinValueValidator(1),MaxValueValidator(10)])
+    content = models.IntegerField(default=0,blank=True,validators=[MinValueValidator(1),MaxValueValidator(10)])
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Projects,on_delete=models.CASCADE)

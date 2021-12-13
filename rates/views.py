@@ -25,8 +25,9 @@ def search_projects(request):
         search_term = request.GET.get("search_project")
         searched_projects = Projects.search_user_project(search_term)
         message = f"{search_term}"
+        form = ProjectForm()
 
-        return render(request, 'search.html', {"message":message,"projects": searched_projects})
+        return render(request, 'search.html', {"message":message,"projects": searched_projects,"form":form})
 
     else:
         message = "You haven't searched for any term"

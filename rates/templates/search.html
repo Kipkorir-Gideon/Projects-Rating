@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 search">
+            <div class="row text-center">
+                {% if projects%}
+                  <h1>Found {{ projects|length }} of searched term {{message}}</h1>
+                {% else %}
+                  <h1> Found 0 projects for the search term {{message}}</h1>
+                {% endif %}
+              
+              </div>
+            {% for project in projects %}
+            <div class="flex">
+                <div>
+                    <a href="{% url 'profile' user.user.id  %}">
+                        <img src="{{project.screenshot.url}}" class="rounded-circle border" alt="img"
+                            width="200" height="200">
+                    </a>
+                </div>
+                <div>
+                    <p class="ml-2"><span class="font-weight-bold">{{user.user.username}}</span></p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+
+
+{% endblock %}
