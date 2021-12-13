@@ -95,12 +95,12 @@ def rating(request, project_id):
 
 class ProjectList(APIView):
   def get(self,request,format=None):
-    projects=Projects.objects.all()
-    serializers=ProjectSerializer(projects,many=True)
+    all_projects=Projects.objects.all()
+    serializers=ProjectSerializer(all_projects,many=True)
     return Response(serializers.data)
 
 class ProfileList(APIView):
   def get(self,request,format=None):
-    profiles=Profile.objects.all()
-    serializers=ProfileSerializer(profiles,many=True)
+    all_profiles=Profile.objects.all()
+    serializers=ProfileSerializer(all_profiles,many=True)
     return Response(serializers.data)
