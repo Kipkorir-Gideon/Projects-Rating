@@ -5,24 +5,27 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3"></div>
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <div class="card">
-                <h1>{{projects.title}}</h1>
               <img src="{{project.screenshot.url}}" class="card-img-top" alt="project screenshot">
+              <h3 class="ml-3">{{project.title}}</h3>
               <div class="card-body">
-                <h5 class="card-title">{{projects.user}} </h5>
-                <a href="{{projects.site_url}}">{{projects.site_url}}</a>
-                <p class="card-text">{{projects.description}}</p>
-                <p class="card-text">{{projects.day_posted}}</p>
-                <p class="card-text">{{projects.owner}}</p>
+                <h5 class="card-title">{{project.user}} </h5>
+                <a class="btn btn-sm btn-outline-info" href="{{ project.site_url }}">Site Link</a>
+                <p class="card-text">{{project.description}}</p>
+                <p class="card-text">{{project.day_posted|date}}</p>
+                <p class="card-text">{{project.owner}}</p>
               </div>
             </div> <br><br>
             <div class="row">
-                <div class="col-sm-10">
+                <div class="col-md-10">
                     <h4>Ratings</h4>
-                    <p>Design: {{design}}%</p>
-                    <p>Usability:{{usability}}%</p>
-                    <p>Content:{{content}}%</p>
+                    {% for rate in rates %}
+                    <p>Design: {{rate.design}}</p>
+                    <p>Usability:{{rate.usability}}</p>
+                    <p>Content:{{rate.content}}</p>
+                    <p>Average:{{rate.aggregate}}</p>
+                    {%  endfor %}
                 </div>
             </div>
         </div>
@@ -30,53 +33,17 @@
     </div>
     <div class="row">
         <div class="col-sm-3"></div>
-        <div class="col-sm-6"> 
-            <form action="">
-
-            <h3>Design</h3>
-
-            <input id="design" type="radio" name="design" value="1">1
-            <input id="design" type="radio" name="design" value="2">2
-            <input id="design" type="radio" name="design" value="3">3
-            <input id="design" type="radio" name="design" value="4">4
-            <input id="design" type="radio" name="design" value="5">5
-            <input id="design" type="radio" name="design" value="6">6
-            <input id="design" type="radio" name="design" value="7">7
-            <input id="design" type="radio" name="design" value="8">8
-            <input id="design" type="radio" name="design" value="9">9
-            <input id="design" type="radio" name="design" value="10">10 <br><br>
-
-            <h3>Usability</h3>
-
-            <input id="usability" type="radio" name="usability" value="1">1
-            <input id="usability" type="radio" name="usability" value="2">2
-            <input id="usability" type="radio" name="usability" value="3">3
-            <input id="usability" type="radio" name="usability" value="4">4
-            <input id="usability" type="radio" name="usability" value="5">5
-            <input id="usability" type="radio" name="usability" value="6">6
-            <input id="usability" type="radio" name="usability" value="7">7
-            <input id="usability" type="radio" name="usability" value="8">8
-            <input id="usability" type="radio" name="usability" value="9">9
-            <input id="usability" type="radio" name="usability" value="10">10 <br><br>
-
-            <h3>Content</h3>
-
-            <input id="content" type="radio" name="content" value="1">1
-            <input id="content" type="radio" name="content" value="2">2
-            <input id="content" type="radio" name="content" value="3">3
-            <input id="content" type="radio" name="content" value="4">4
-            <input id="content" type="radio" name="content" value="5">5
-            <input id="content" type="radio" name="content" value="6">6
-            <input id="content" type="radio" name="content" value="7">7
-            <input id="content" type="radio" name="content" value="8">8
-            <input id="content" type="radio" name="content" value="9">9
-            <input id="content" type="radio" name="content" value="10">10 <br><br>
-
-            <input type="submit" class="btn btn-outline-primary" value="My Rates">{% for mes in messages %}
-            <h3>{{mes}}</h3>
-            {% endfor %}
-
+        <div class="col-md-6"> 
+            {% if rating_status %}
+            {% else %}
+            {% if user.is_authenticated %}
+            <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {% bootstrap_form rating_form %}
+              <button class="btn btn-success link">Rate</button>
             </form>
+            {% endif %}
+            {% endif %}
         </div>
         <div class="col-sm-3"></div>
     </div>

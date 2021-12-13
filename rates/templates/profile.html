@@ -10,7 +10,7 @@
         <div class="col-sm-4">
             {% if user.profile.photo.url %}
             <img src="{{user.profile.photo.url}}" alt="{{user.photo.url}}"
-            style="height: 20vh; width:20vh; border-radius:50%" class="rounded-circle account-img">
+            style="height: 200px; width:200px; border-radius:50%" class="rounded-circle account-img">
             {% else %}
             <i style="font-size:100px;color:#4888BE" class="fa fa-user" aria-hidden="true"></i>
             {% endif %}
@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             {% if project.user.profile.photo.url %}
-                            <p><a href="{% url 'users_profile' project.user.id %}"><img class="profile_photo"
+                            <p><a href="{% url 'uprofile' project.user.id %}"><img class="profile_photo"
                                         src="{{ project.user.profile.photo.url }}" alt="{{ photo.profile.name }}"></p>
                             {% else %}
                             <i style="font-size:100px;color:#1d1c1c" class="fa fa-user" aria-hidden="true"></i>

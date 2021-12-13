@@ -11,20 +11,18 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="view overlay">
-                        <img class="card-img-top" src="{{ project.screenshot.url }}"
-                             alt="{{screenshot.title}}">
                         <a href="{% url 'rating' project.id %}">
+                            <img class="card-img-top" src="{{ project.screenshot.url }}"
+                             alt="{{screenshot.title}}">
                             <div class="mask rgba-white-slight"></div>
                         </a>
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title"><a href="{% url 'rating' project.id %}">{{project.title|title}}</a> 
-                            <a class="btn btn-sm btn-outline-info" href="{{ project.site_url }}"> View</a></h4>
+                        <h4 class="card-title"><a href="{% url 'rating' project.id %}">{{project.title|title}}</a></h4>
+                            <a class="btn btn-sm btn-outline-info" href="{{ project.site_url }}"> Visit Site</a>
                         <hr>
-                        <p class="card-text "><img src="{{project.user.profile.photo.url}}"
-                                                   class="nav-img mr-2"
-                                                   alt="">
-                            By {{project.owner|title}} <span style="float:right">{{project.day_posted|date}}</span>
+                        <p class="card-text ">
+                            By  <strong>{{project.owner|title}}</strong> <span style="float:right">{{project.day_posted|date}}</span>
                         </p>
                     </div>
                 </div>

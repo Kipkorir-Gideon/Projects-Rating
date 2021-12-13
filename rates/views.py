@@ -58,9 +58,9 @@ def rating(request, project_id):
     c_user = request.user
     rates = Rates.objects.filter(id=project_id).all()
     project = Projects.objects.get(id=project_id)
-    project_rating = Rates.objects.filter(project=project_id,user=request.user).first()
+    ratings = Rates.objects.filter(project=project_id,user=request.user).first()
     rating_status = None
-    if project_rating is None:
+    if ratings is None:
         rating_status = False
     else:
         rating_status = True
@@ -71,13 +71,13 @@ def rating(request, project_id):
             rate.user = request.user
             rate.project = project
             rate.save()
-            ratings = Rates.objects.filter(project=project_id)
+            project_ratings = Rates.objects.filter(project=project_id)
 
-            design = [design.design for design in ratings]
+            design = [design.design for design in project_ratings]
             design_average = sum(design) / len(design)
-            usability = [usability.usability for usability in ratings]
+            usability = [usability.usability for usability in project_ratings]
             usability_average = sum(usability) / len(usability)
-            content = [content.content for content in ratings]
+            content = [content.content for content in project_ratings]
             content_average = sum(content) / len(content)
 
             aggregate = (design_average + usability_average + content_average)/3
@@ -85,11 +85,13 @@ def rating(request, project_id):
             rate.design_average = round(design_average, 2)
             rate.usability_average = round(usability_average, 2)
             rate.content_average = round(content_average, 2)
+            rate.aggregate = round(aggregate, 2)
             rate.save()
             return HttpResponseRedirect(request.path_info)
     else:
-        form = RatingsForm()
-    return render(request, 'rating.html', {'form': form,'c_user': c_user,'rates': rates,'project': project,'rating_status':rating_status})
+        form = ProjectForm()
+        rating_form = RatingsForm()
+    return render(request, 'rating.html', {'rating_form': rating_form,'form': form,'c_user': c_user,'rates': rates,'project': project,'rating_status':rating_status})
 
 
 
