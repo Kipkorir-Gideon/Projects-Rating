@@ -18,15 +18,17 @@
             {% for project in projects %}
             <div class="flex">
                 <div>
-                    <a href="{% url 'profile' user.user.id  %}">
-                        <img src="{{project.screenshot.url}}" class="rounded-circle border" alt="img"
-                            width="200" height="200">
+                    <a href="{% url 'rating' project.id  %}">
+                        <h4 class="text-center">{{ project.title}}</h4>
+                        <img src="{{project.screenshot.url}}" class="card-img-top" alt="img"
+                            width="320" height="300">
                     </a>
                 </div>
                 <div>
                     <p class="ml-2"><span class="font-weight-bold">{{user.user.username}}</span></p>
                 </div>
             </div>
+            <hr>
             {% endfor %}
         </div>
         <div class="col-md-4"></div>
