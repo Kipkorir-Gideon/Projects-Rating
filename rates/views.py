@@ -66,9 +66,9 @@ def rating(request, project_id):
     else:
         rating_status = True
     if request.method == 'POST':
-        form = RatingsForm(request.POST)
-        if form.is_valid():
-            rate = form.save(commit=False)
+        rating_form = RatingsForm(request.POST)
+        if rating_form.is_valid():
+            rate = rating_form.save(commit=False)
             rate.user = request.user
             rate.project = project
             rate.save()

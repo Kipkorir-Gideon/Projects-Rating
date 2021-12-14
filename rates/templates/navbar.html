@@ -1,84 +1,90 @@
 {% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
-<nav class="navbar sticky-top navbar-light bg-light" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-  <div class="container-fluid">
-    <div class="navbar-header">
+  <nav class="navbar sticky-top navbar-light bg-light"
+    style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+    <div class="container-fluid">
+      <div class="navbar-header">
         <a class="navbar-brand" href="{% url 'projects' %}">Rates</a>
-    </div>
-    <!-- Adding a search form  -->
-    <div class="col-sm-4 col-md-4 navbar-right">
+      </div>
+      <!-- Adding a search form  -->
+      <div class="col-sm-4 col-md-4 navbar-right">
 
         <form class="mt-4 h1 ml-auto mr-auto" id="searchform" action="{% url 'search' %}">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Projects" name="search_project">
-                <div class="input-group-btn">
-                    <button type="submit" class="btn btn-outline-success mb-4 ml-1"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
-                </div>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Projects" name="search_project">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-outline-success mb-4 ml-1"><i class="fa fa-search"
+                  aria-hidden="true"></i>Search</button>
             </div>
+          </div>
         </form>
-        
-    </div>
-    <!-- search form end -->
-    <div>
-            {% if user.is_authenticated %}
-            <ul>
-              <li class="dropdown" style="list-style:none;">
-                <a href="#" class="dropdown-toggle btn btn-dark" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                          <span class="caret"></span>
-                      </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                    <a href="/profile/{{request.user.id}}" class="btn btn-outline-primary">{{user.username|title}}</a>
-                  </li>
-                  <li>
-                    <a href="/logout" class="nav-link">Logout</a>
-                  </li>
-                </ul>
-                <button type="button" class="btn btn-warning font-weight-bold text-center ml-5" style="border-radius: 10%" data-toggle="modal" data-target="#postModal">+ Project</button>
+
+      </div>
+      <!-- search form end -->
+      <div>
+        {% if user.is_authenticated %}
+        <ul>
+          <li class="dropdown" style="list-style:none;">
+            <a href="#" class="dropdown-toggle btn btn-dark" data-toggle="dropdown" role="button"
+              aria-expanded="false">Account
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="/profile/{{request.user.id}}" class="btn btn-outline-primary">{{user.username|title}}</a>
+              </li>
+              <li>
+                <a href="/logout" class="nav-link">Logout</a>
               </li>
             </ul>
-            {% else %}
-            <div>
-                <a class='btn btn-outline-dark' href="/accounts/login">Login</a>
-            
-                <a href="/accounts/register" class="btn btn-outline-primary">Register</a>
-            </div>
+            <button type="button" class="btn btn-warning font-weight-bold text-center ml-5" style="border-radius: 10%"
+              data-toggle="modal" data-target="#postModal">+ Project</button>
+          </li>
+        </ul>
+        {% else %}
+        <div>
+          <a class='btn btn-outline-dark' href="/accounts/login">Login</a>
 
-            {% endif %}
-          </div>  
-  </div>
-
-  <!--Project modal-->
-  <div class="modal fade" tabindex="-1" id="postModal" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Post</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
-              </div>
-              <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </form> 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
+          <a href="/accounts/register" class="btn btn-outline-primary">Register</a>
         </div>
+
+        {% endif %}
+      </div>
+    </div>
+
+  </nav>
+</body>
+<!--Project modal-->
+<div class="modal fade" tabindex="-1" id="postModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
+</div>
 
-</nav>
-</body>
 </html>
