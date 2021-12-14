@@ -4,6 +4,13 @@ An application where users rate the projects of other developers. Rating is done
 ## Description
 This is a django web application for rating projects. A registered user is allowed to rate on posted projects. A user as well can post projects through a form provided. A screenshot of the project landing page with a title and a site url is what is required for posting. Rating is done in three categories and the average is taken as the overall rating.
 
+## Home Page Screenshot
+![Screenshot from 2021-12-14 19-03-24](https://user-images.githubusercontent.com/87479324/146036411-3f930ff5-1a3d-434f-a112-8d1d609178ab.png)
+
+## Rating Page Screenshot
+![Screenshot from 2021-12-14 19-04-31](https://user-images.githubusercontent.com/87479324/146036554-0f3eae4c-c9b9-4915-9e4b-458f7dd8b4b4.png)
+
+
 ## Author
 Ngetich Gideon
 
