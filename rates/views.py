@@ -53,7 +53,7 @@ def profile(request, pk):
     return render(request, 'profile.html', {'user': user, 'form': form, 'profile_form': profile_form, "c_user": c_user})
 
 
-
+@login_required
 def rating(request, project_id):
     c_user = request.user
     rates = Rates.objects.filter(id=project_id).all()

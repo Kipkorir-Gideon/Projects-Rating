@@ -5,21 +5,21 @@
 <div class="container">
     <h2 class="text-center">Welcome to Rates</h2>
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class ="col-md-8">
-            {% for project in projects%}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="view overlay">
+        {% for project in projects%}
+        <div class ="col-md-4">
+            <div class="card-deck">
+                <div class="card mb-2">
+                    <div class="view overlay zoom image2">
                         <a href="{% url 'rating' project.id %}">
                             <img class="card-img-top" src="{{ project.screenshot.url }}"
                              alt="{{screenshot.title}}">
                             <div class="mask rgba-white-slight"></div>
                         </a>
                     </div>
-                    <div class="card-body">
-                        <h4 class="card-title"><a href="{% url 'rating' project.id %}">{{project.title|title}}</a></h4>
+                    <div class="card-body pr-2 pl-2 pr-2 mr-2">
+                        <h4 class="card-title"><a href="{% url 'rating' project.id %}" style="color: rgb(233, 109, 109)">{{project.title|title}}</a></h4>
                             <a class="btn btn-sm btn-outline-info" href="{{ project.site_url }}"> Visit Site</a>
+                        <p><em>{{project.description}}</em></p>
                         <hr>
                         <p class="card-text ">
                             By  <strong>{{project.owner|title}}</strong> <span style="float:right">{{project.day_posted|date}}</span>
@@ -27,9 +27,8 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        <div class="col-md-2"></div>
+        {% endfor %}
     </div>
 </div>
 
