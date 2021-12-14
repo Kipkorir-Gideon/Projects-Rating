@@ -5,10 +5,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <br>
+            <div class="card results">
                 <img src="{{project.screenshot.url}}" class="card-img-top" alt="project screenshot">
-                <h3 class="ml-3">{{project.title}}</h3>
-                <div class="card-body">
+                <h3 class="ml-3"style="color: rgb(233, 109, 109)">{{project.title}}</h3>
+                <div class="card-body"style="background-color: rgb(236, 178, 178);">
                     <h5 class="card-title">{{project.user}} </h5>
                     <a class="btn btn-sm btn-outline-info" href="{{ project.site_url }}">Site Link</a>
                     <p class="card-text">{{project.description}}</p>
@@ -18,12 +19,15 @@
             </div> <br><br>
         </div>
         <div class="col-md-6">
-            <h4>Ratings</h4>
-            {% for rate in rates %}
-            <p>Design: {{rate.design}}</p>
-            <p>Usability: {{rate.usability}}</p>
-            <p>Content: {{rate.content}}</p>
-            <p>Average: {{rate.aggregate}}</p>
+            <br>
+            <h4 class="text-center">Ratings</h4>
+            <div class="results">
+                {% for rate in rates %}
+                <p>Design: {{rate.design}}</p>
+                <p>Usability: {{rate.usability}}</p>
+                <p>Content: {{rate.content}}</p>
+                <p>Average: {{rate.aggregate}}</p>
+            </div>
             {%  endfor %}
             {% if rating_status %}
             {% else %}
