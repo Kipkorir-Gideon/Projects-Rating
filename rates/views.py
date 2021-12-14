@@ -48,9 +48,10 @@ def profile(request, pk):
         return redirect("projects")
     user = User.objects.get(pk=pk)
     c_user = request.user
+    projects = Projects.objects.filter(id = c_user.id).all()
     form = ProjectForm()
     profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profile.html', {'user': user, 'form': form, 'profile_form': profile_form, "c_user": c_user})
+    return render(request, 'profile.html', {'user': user, 'Projects': projects, 'form': form, 'profile_form': profile_form, "c_user": c_user})
 
 
 @login_required

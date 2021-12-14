@@ -17,9 +17,10 @@
                 {% endif %}
                 <section>
                     <div class="row1">
-                        <h3 class="text-monospace">{{user.username}}</h3>
+                        <h3 class="text-monospace text-center">{{user.username}}</h3>
+                        <p class="text-center">{{user.profile.bio}}</p>
                     </div>
-                    <div class="text-right">
+                    <div class="text-center">
                         <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
                             data-target="#profileModal">Edit Profile</button>
                     </div>
@@ -32,19 +33,22 @@
                     <div class="profile">
                         <div class="row">
                             <div class="col-md-2">
-                                {% if project.user.profile.photo.url %}
-                                <p><a href="{% url 'profile' project.user.id %}"><img class="profile_photo"
-                                            src="{{ project.user.profile.photo.url }}" alt="{{ photo.profile.name }}"></p>
-                                {% else %}
-                                <i style="font-size:100px;color:#1d1c1c" class="fa fa-user" aria-hidden="true"></i>
-                                {% endif %}
+                                <p><a href="{% url 'rating' project.id %}"><img class="profile_photo"
+                                            src="{{ project.screenshot.url }}" alt="{{ project.title}}">
+                                </p>
                             </div>
-    
+                            <div class="card-body pr-2 pl-2 pr-2 mx-2" style="background-color: rgb(236, 178, 178);">
+                                <h4 class="card-title"><a href="{% url 'rating' project.id %}" style="color: rgb(233, 109, 109)">{{project.title|title}}</a></h4>
+                                    <a class="btn btn-sm btn-outline-info" href="{{ project.site_url }}"> Visit Site</a>
+                                <p><em>{{project.description}}</em></p>
+                                <hr>
+                                <p class="card-text ">
+                                    <span style="float:left">{{project.day_posted|date}}</span>
+                                </p>
+                            </div>
                         </div>
                         </a>
                     </div>
-    
-    
                     {% endfor %}
     
                     {% endif %}
