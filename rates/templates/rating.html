@@ -28,8 +28,9 @@
                 <p>Usability: {{rate.usability}}</p>
                 <p>Content: {{rate.content}}</p>
                 <p>Average: {{rate.aggregate}}</p>
+                <br>
+                {%  endfor %}
             </div>
-            {%  endfor %}
             {% if rating_status %}
             {% else %}
             {% if user.is_authenticated %}
