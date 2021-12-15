@@ -57,8 +57,8 @@ def profile(request, pk):
 @login_required
 def rating(request, project_id):
     c_user = request.user
-    rates = Rates.objects.filter(id=project_id).all()
-    project = Projects.objects.get(id=project_id)
+    rates = Rates.objects.filter(project_id=project_id).all()
+    project = Projects.objects.get(pk=project_id)
     ratings = Rates.objects.filter(project=project_id,user=request.user).first()
     rating_status = None
     if ratings is None:
