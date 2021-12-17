@@ -35,8 +35,9 @@ def search_projects(request):
         return render(request, 'search.html', {"message":message,"projects": searched_projects,"form":form})
 
     else:
+        form = ProjectForm()
         message = "You haven't searched for any term"
-        return render(request, 'search.html', {"message": message})
+        return render(request, 'search.html', {"message": message,"form":form})
 
 
 @login_required
